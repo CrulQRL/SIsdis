@@ -231,22 +231,22 @@ while True:
 
 				elif path.startswith('/api/'):
 					subPath = path.split('/')
-					if subPath[2] == 'plus_one' and len(subPath) >= 4:
+					if subPath[2] == 'plus_one' and len(subPath) == 4:
 						val = path.split('/')[3]
 
 						response = None
 						header = None
 
 						if not isValidInteger(val):
-							response = build_response_failed(404, "The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.")
-							header = build_header(404, 'application/json', response)
+							response = build_response_failed(400, "Not a number")
+							header = build_header(400, 'application/json', response)
 						else:
 							response = build_plus_one_service_response(1, int(val) + 1)
 							header = build_header(200, 'application/json', response)
 
 						final_response = header + response
 						connection.send(final_response)
-					elif subPath[2] == 'spesifikasi.yaml':
+					elif subPath[2] == 'spesifikasi.yaml' and len(subPath) == 3:
 						file = open('spesifikasi.yaml', 'rb')
 						response = file.read()
 						file.close()
