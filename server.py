@@ -296,7 +296,7 @@ while True:
 
 				elif path.startswith('/api/'):
 					subPath = path.split('/')
-					if subPath[2] == 'hello':
+					if subPath[2] == 'hello' and len(subPath) == 3:
 						currentVisit = datetime.datetime.now()
 						requestBody = request.split('\r\n\r\n')[1]
 						requestBody = json.loads(requestBody)

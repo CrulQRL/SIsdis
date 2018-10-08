@@ -8,4 +8,4 @@ python3 get-pip.py
 pip install requests
 git clone https://github.com/CrulQRL/SIsdis.git
 
-nohup python3 /root/server.py &
+nohup python3 /root/SIsdis/server.py &
