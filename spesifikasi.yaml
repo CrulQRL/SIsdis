@@ -1,0 +1,114 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: helloService
+  license:
+    name: GPL
+    url: 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+host: host1506728453.sisdis.infralabs.cs.ui.id
+basePath: "/api"
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /hello:
+    post:
+      description: Hello
+      tags:
+        - helloBinding
+      operationId: Hello
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/Request'
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/ErrorRequest'
+          examples: {}
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/Response'
+          examples: {}
+  /plus_one/{val}:
+    get:
+      description: "Returns an incremented value"
+      parameters:
+      - name: "val"
+        in: "path"
+        description: "value that need to be incremented"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Plusoneret"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ErrorRequest"
+definitions:
+  Request:
+    title: request
+    type: object
+    properties:
+      request:
+        description: ''
+        type: string
+    required:
+      - request
+  Response:
+    title: response
+    type: object
+    properties:
+      apiversion:
+        description: ''
+        type: integer
+      count:
+        description: ''
+        type: integer
+      currentvisit:
+        description: ''
+        type: string
+      response:
+        description: ''
+        type: string
+    required:
+      - response
+  Plusoneret:
+    title: plusoneret
+    type: object
+    properties:
+      apiversion:
+        description: ''
+        type: integer
+      plusoneret:
+        description: ''
+        type: integer
+    required:
+      - plusoneret
+  ErrorRequest:
+    title: errorrequest
+    type: object
+    properties:
+      detail:
+        description: ''
+        type: string
+      status:
+        description: ''
+        type: integer
+      title:
+        description: ''
+        type: string
