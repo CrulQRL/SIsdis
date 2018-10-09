@@ -33,13 +33,15 @@ paths:
         '200':
           description: 'OK'
           schema:
-            $ref: '#/definitions/ErrorRequest'
-          examples: {}
+            $ref: '#/definitions/HelloResponse'
         '400':
           description: 'Bad Request'
           schema:
-            $ref: '#/definitions/Response'
-          examples: {}
+            $ref: '#/definitions/HelloErrorRequest'
+        '404':
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/NotFoundErrorRequest"
   /plus_one/{val}:
     get:
       description: "Returns an incremented value"
@@ -58,7 +60,7 @@ paths:
         404:
           description: "Not Found"
           schema:
-            $ref: "#/definitions/ErrorRequest"
+            $ref: "#/definitions/NotFoundErrorRequest"
 definitions:
   Request:
     title: request
@@ -66,24 +68,29 @@ definitions:
     properties:
       request:
         description: ''
+        example: 'ardhi'
         type: string
     required:
       - request
-  Response:
+  HelloResponse:
     title: response
     type: object
     properties:
       apiversion:
         description: ''
+        example: 1
         type: integer
       count:
         description: ''
+        example: 1
         type: integer
       currentvisit:
         description: ''
+        example: '2018-10-09 03:28:52.454861'
         type: string
       response:
         description: ''
+        example: 'Good Night, ardhi'
         type: string
     required:
       - response
@@ -93,22 +100,44 @@ definitions:
     properties:
       apiversion:
         description: ''
+        example: 1
         type: integer
       plusoneret:
         description: ''
+        example: 5
         type: integer
     required:
       - plusoneret
-  ErrorRequest:
-    title: errorrequest
+  HelloErrorRequest:
+    title: helloerrorrequest
     type: object
     properties:
       detail:
         description: ''
+        example: "'request' is a required property"
         type: string
       status:
         description: ''
+        example: 400
         type: integer
       title:
         description: ''
         type: string
+        example: 'Bad Request'
+  
+  NotFoundErrorRequest:
+    title: notfounderrorrequest
+    type: object
+    properties:
+      detail:
+        description: ''
+        example: 'The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.'
+        type: string
+      status:
+        description: ''
+        example: 404
+        type: integer
+      title:
+        description: ''
+        type: string
+        example: 'Not Found'

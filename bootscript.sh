@@ -7,5 +7,5 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 pip install requests
 git clone https://github.com/CrulQRL/SIsdis.git
-
-nohup python3 /root/SIsdis/server.py &
+cd SIsdis
+nohup python3 server.py &

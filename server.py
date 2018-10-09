@@ -238,7 +238,7 @@ while True:
 						header = None
 
 						if not isValidInteger(val):
-							response = build_response_failed(400, "Not a number")
+							response = build_response_failed(404, "The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.")
 							header = build_header(400, 'application/json', response)
 						else:
 							response = build_plus_one_service_response(1, int(val) + 1)
