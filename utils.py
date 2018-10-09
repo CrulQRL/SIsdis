@@ -21,3 +21,9 @@ def getLatestCount():
 	except FileNotFoundError as e:
 		updateCount(0)
 		return 0
+
+def getApiVersion():
+	with open("spesifikasi.yaml") as text_file:  
+		spesifikasi = text_file.read()
+		version = spesifikasi.split("version: ")[1].split()[0].replace("'", "")
+		return int(version)

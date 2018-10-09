@@ -42,7 +42,7 @@ paths:
           description: "Not Found"
           schema:
             $ref: "#/definitions/NotFoundErrorRequest"
-  /plus_one/{val}:
+  /plusone/{val}:
     get:
       description: "Returns an incremented value"
       parameters:

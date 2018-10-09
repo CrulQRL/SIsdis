@@ -1,4 +1,4 @@
-from utils import isValidInteger, updateCount, getLatestCount
+from utils import isValidInteger, updateCount, getLatestCount, getApiVersion
 import traceback
 import socket
 from urllib.parse import unquote
@@ -126,6 +126,7 @@ def build_response_failed(status, description):
 	return response.encode('utf-8')
 
 count = getLatestCount()
+verison = getApiVersion()
 
 while True:  
 	
@@ -231,7 +232,7 @@ while True:
 
 				elif path.startswith('/api/'):
 					subPath = path.split('/')
-					if subPath[2] == 'plus_one' and len(subPath) == 4:
+					if subPath[2] == 'plusone' and len(subPath) == 4:
 						val = path.split('/')[3]
 
 						response = None
@@ -241,7 +242,7 @@ while True:
 							response = build_response_failed(404, "The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.")
 							header = build_header(400, 'application/json', response)
 						else:
-							response = build_plus_one_service_response(1, int(val) + 1)
+							response = build_plus_one_service_response(verison, int(val) + 1)
 							header = build_header(200, 'application/json', response)
 
 						final_response = header + response
@@ -313,7 +314,7 @@ while True:
 							data = r.json()
 							greeting = 'Good {}, {}'.format(data['state'], name)
 							count += 1
-							response = build_hello_service_response(1, count, currentVisit, greeting)
+							response = build_hello_service_response(verison, count, currentVisit, greeting)
 							header = build_header(200, 'application/json', response)
 
 						final_response = header + response
